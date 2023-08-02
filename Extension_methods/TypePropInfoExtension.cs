@@ -4,14 +4,22 @@
 //2 Хочу чтобы автор типа, на котором будет вызываться  .ToString() мог контролировать порядок следования членов в строке,
 //посредством указания порядка через атрибут.
 
+using System.Reflection;
 namespace Extensions
 {
-    class Program
+    
+    public static class TypePropInfoExtension
     {
-        static void Main(string[] args)
+        public static void ToStringExtension<T>(this T obj)
         {
-            var doggy = new Dog("Sam", "White");
-            doggy.ToStringExtension(); 
+            var list1 = new SortedList<int, string>();
+            foreach (var prop in obj.GetType().GetProperties())
+            {
+                var attr = prop.GetCustomAttributes<StringOrderAttribute>().Select(x => x.Order).FirstOrDefault();
+                list1.Add(attr, $"\"{prop.Name}\":\"{prop.GetValue(obj)}\"");
+            }
+            foreach (var i in list1)
+                Console.WriteLine(i.Value);
 
         }
     }

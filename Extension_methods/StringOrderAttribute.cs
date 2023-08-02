@@ -6,14 +6,15 @@
 
 namespace Extensions
 {
-    class Program
-    {
-        static void Main(string[] args)
+    [AttributeUsage(AttributeTargets.Property)]
+    class StringOrderAttribute : Attribute 
+    { 
+        public int Order { get; }
+        public StringOrderAttribute(int order) 
         {
-            var doggy = new Dog("Sam", "White");
-            doggy.ToStringExtension(); 
-
+            Order = order;
         }
+
     }
 
 }

@@ -6,14 +6,20 @@
 
 namespace Extensions
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var doggy = new Dog("Sam", "White");
-            doggy.ToStringExtension(); 
 
+    public class Dog
+    {
+        public Dog(string name, string color)
+        {
+            Name = name;
+            Color = color;
         }
+        [StringOrder(1)]
+        public string Name { get; set; }
+        [StringOrder(2)]
+        public string Color { get; set; }
+        [StringOrder(3)]
+        public int age { get; set; } = 21;
     }
 
 }

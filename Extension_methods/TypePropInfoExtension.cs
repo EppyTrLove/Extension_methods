@@ -12,14 +12,14 @@ namespace Extensions
     {
         public static void ToStringExtension<T>(this T obj)
         {
-            var list1 = new SortedList<int, string>();
+            var srtdList = new SortedList<int, string>();
             foreach (var prop in obj.GetType().GetProperties())
             {
                 var attr = prop.GetCustomAttributes<StringOrderAttribute>().Select(x => x.Order).FirstOrDefault();
-                list1.Add(attr, $"\"{prop.Name}\":\"{prop.GetValue(obj)}\"");
+                srtdList.Add(attr, $"\"{prop.Name}\":\"{prop.GetValue(obj)}\"");
             }
-            foreach (var i in list1)
-                Console.WriteLine(i.Value);
+            foreach (var prop in srtdList)
+                Console.WriteLine(prop.Value);
 
         }
     }
